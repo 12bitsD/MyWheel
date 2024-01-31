@@ -8,9 +8,6 @@ class Browser:
         self.windows = Tk()
         global H,W
         H,W=800,800
-
-
-
         #setting canvas
         self.canvas=Canvas(
             self.windows,
@@ -67,8 +64,14 @@ class Browser:
         #parse the content respond by url
         out =[]
         buffer=''
+        _tage_list = {'{':1,
+                      '}':0}
         in_tag=FALSE
         for c in body:
+            if c in _tage_list and _tage_list[c]:
+                print('pass')
+                break
+
             if c=="<":
                 in_tag=True
                 if buffer : out.append(Text(buffer))
